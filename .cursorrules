@@ -1,0 +1,60 @@
+You are an expert in TypeScript, Node.js, robotics perception, and spatial computing.
+
+Project: RoboMnemo — Bio-inspired spatial memory and payment verification for autonomous robots.
+
+Architecture: 5-layer system
+1. Perception (src/perception/) — HMAC-signed camera frames, stereo depth, dual-camera fusion
+2. Memory (src/memory/) — Short/mid/long-term spatial memory, place cells, grid cells, Merkle integrity
+3. Navigation (src/navigation/) — A* and RRT* pathfinding on 3D occupancy grids
+4. Verification (src/verification/) — SSIM + LPIPS + depth MAE spatial proofs for payment authorization
+5. Anti-spoofing (src/antispoofing/) — Replay detection, adversarial patches, depth injection, canary honeypots
+
+Core Rules:
+- Every camera frame MUST be HMAC-SHA256 signed at capture time
+- All secrets must be >= 32 characters
+- Use deriveKey() for subsystem key isolation — NEVER reuse the master secret directly
+- Fail closed: if any integrity check fails, reject the frame/proof
+- No floating-point equality checks — use tolerance-based comparison
+- All spatial coordinates use Vec3 { x, y, z } — right-handed coordinate system
+- Quaternions are { w, x, y, z } — Hamilton convention, w-first
+- Depth maps are Float32Array, RGB is Uint8Array (packed R,G,B per pixel)
+
+Type System (src/types/index.ts):
+- Pose = { position: Vec3, orientation: Quaternion, timestamp: number }
+- CameraFrame = RGB + depth + pose + HMAC + sequenceNumber
+- GaussianSplat = 59 parameters (position, covariance, SH coefficients, opacity)
+- SpatialProof = metrics + signature + nonce + Merkle root
+- ThreatDetection = { type, severity, confidence, details, mitigationApplied }
+
+Testing:
+- Framework: vitest
+- Run all: npx vitest run
+- Run specific: npx vitest run tests/memory/place-cells.test.ts
+- 87 tests across 5 test files
+- Test images use deterministic pseudo-random data (seed-based)
+
+Key Patterns:
+- Place cells: Gaussian activation centered at a 3D position
+- Grid cells: Hexagonal pattern via 3 cosine waves at 60° offsets
+- SSIM: 8x8 sliding window, constants C1=6.5025 C2=58.5225
+- Spatial proof composite: SSIM * 0.4 + (1-LPIPS) * 0.3 + depthScore * 0.3
+- Settlement: atomic verify-then-pay, proof must pass integrity check first
+
+File Layout:
+src/
+  types/index.ts        — All type definitions
+  utils/crypto.ts       — HMAC, SHA-256, nonces, key derivation
+  utils/math.ts         — Vec3, quaternion, coordinate transforms
+  perception/camera.ts  — Frame capture, dual cameras, depth fusion
+  memory/spatial-memory.ts — STM/MTM/LTM with Merkle trees
+  memory/place-cells.ts — Place cells, grid cells, spatial coding
+  navigation/pathfinding.ts — A*, RRT*, occupancy grid
+  verification/spatial-proof.ts — SSIM, LPIPS, spatial proofs, settlements
+  antispoofing/detector.ts — Replay, patches, depth, canaries
+  index.ts              — createAgent() factory, public API
+
+Dependencies:
+- merkletreejs + crypto-js — Merkle tree for memory integrity
+- sharp — Image processing (future: resize for multi-scale LPIPS)
+- ssim.js — Reference SSIM (we also have custom implementation)
+- typescript, vitest, eslint — Dev tooling

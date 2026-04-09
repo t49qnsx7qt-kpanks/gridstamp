@@ -1,0 +1,77 @@
+{
+  "name": "@robomnemo/core",
+  "version": "0.1.0-alpha.1",
+  "description": "Embodied spatial memory + payment verification for autonomous robots. 3DGS-powered spatial proof protocol.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./perception": {
+      "import": "./dist/perception/index.js",
+      "types": "./dist/perception/index.d.ts"
+    },
+    "./memory": {
+      "import": "./dist/memory/index.js",
+      "types": "./dist/memory/index.d.ts"
+    },
+    "./navigation": {
+      "import": "./dist/navigation/index.js",
+      "types": "./dist/navigation/index.d.ts"
+    },
+    "./verification": {
+      "import": "./dist/verification/index.js",
+      "types": "./dist/verification/index.d.ts"
+    },
+    "./antispoofing": {
+      "import": "./dist/antispoofing/index.js",
+      "types": "./dist/antispoofing/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
+  },
+  "keywords": [
+    "robotics",
+    "spatial-memory",
+    "3d-gaussian-splatting",
+    "payment-verification",
+    "spatial-proof",
+    "autonomous-robots",
+    "place-cells",
+    "grid-cells",
+    "anti-spoofing",
+    "merkle-tree"
+  ],
+  "author": "Jerry Omiagbo <omiagbogold@icloud.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/t49qnsx7qt-kpanks/robomnemo"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0",
+    "@vitest/coverage-v8": "^3.0.0"
+  },
+  "dependencies": {
+    "merkletreejs": "^0.4.0",
+    "sharp": "^0.33.0",
+    "ssim.js": "^3.5.0"
+  }
+}
