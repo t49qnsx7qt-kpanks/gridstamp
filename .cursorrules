@@ -1,13 +1,14 @@
 You are an expert in TypeScript, Node.js, robotics perception, and spatial computing.
 
-Project: RoboMnemo — Bio-inspired spatial memory and payment verification for autonomous robots.
+Project: GridStamp — Spatial proof-of-presence for autonomous robots.
 
-Architecture: 5-layer system
+Architecture: 6-layer system
 1. Perception (src/perception/) — HMAC-signed camera frames, stereo depth, dual-camera fusion
 2. Memory (src/memory/) — Short/mid/long-term spatial memory, place cells, grid cells, Merkle integrity
 3. Navigation (src/navigation/) — A* and RRT* pathfinding on 3D occupancy grids
 4. Verification (src/verification/) — SSIM + LPIPS + depth MAE spatial proofs for payment authorization
 5. Anti-spoofing (src/antispoofing/) — Replay detection, adversarial patches, depth injection, canary honeypots
+6. Gamification (src/gamification/) — Trust tiers, badges, streaks, zone mastery, fleet leaderboard
 
 Core Rules:
 - Every camera frame MUST be HMAC-SHA256 signed at capture time
@@ -30,7 +31,7 @@ Testing:
 - Framework: vitest
 - Run all: npx vitest run
 - Run specific: npx vitest run tests/memory/place-cells.test.ts
-- 169 tests across 10 test files
+- 221 tests across 13 test files
 - Test images use deterministic pseudo-random data (seed-based)
 
 Key Patterns:

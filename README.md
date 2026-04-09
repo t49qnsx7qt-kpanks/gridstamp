@@ -1,8 +1,8 @@
-# RoboMnemo
+# GridStamp
 
-Spatial memory and payment verification for autonomous robots.
+Spatial proof-of-presence for autonomous robots.
 
-RoboMnemo gives robots the ability to prove where they are, remember where they've been, and get paid for verified operations. Built on 3D Gaussian Splatting, bio-inspired navigation (place cells + grid cells), and cryptographic spatial proofs.
+GridStamp gives robots the ability to prove where they are, remember where they've been, and get paid for verified operations. Built on 3D Gaussian Splatting, bio-inspired navigation (place cells + grid cells), and cryptographic spatial proofs.
 
 ## Why
 
@@ -26,18 +26,18 @@ Six layers, each cryptographically isolated:
 ## Install
 
 ```bash
-npm install @robomnemo/core
+npm install gridstamp
 ```
 
 ## Quick Start
 
 ```typescript
-import { createAgent } from '@robomnemo/core';
+import { createAgent } from 'gridstamp';
 
 const agent = createAgent({
   robotId: 'DLV-001',
   cameras: [{ type: 'oak-d-pro', role: 'foveal', /* ... */ }],
-  hmacSecret: process.env.ROBOMNEMO_SECRET, // min 32 chars
+  hmacSecret: process.env.GRIDSTAMP_SECRET, // min 32 chars
 }, cameraDriver);
 
 // Capture and verify
@@ -80,13 +80,13 @@ All tier changes are HMAC-signed. Spoofing attempts result in immediate two-tier
 ## Modules
 
 ```
-@robomnemo/core           # Full SDK
-@robomnemo/core/perception    # Camera + depth
-@robomnemo/core/memory        # Spatial memory + place/grid cells
-@robomnemo/core/navigation    # Pathfinding
-@robomnemo/core/verification  # Spatial proofs + settlements
-@robomnemo/core/antispoofing  # Threat detection
-@robomnemo/core/gamification  # Trust tiers + badges + leaderboard
+gridstamp                    # Full SDK
+gridstamp/perception         # Camera + depth
+gridstamp/memory             # Spatial memory + place/grid cells
+gridstamp/navigation         # Pathfinding
+gridstamp/verification       # Spatial proofs + settlements
+gridstamp/antispoofing       # Threat detection
+gridstamp/gamification       # Trust tiers + badges + leaderboard
 ```
 
 ## Use Cases

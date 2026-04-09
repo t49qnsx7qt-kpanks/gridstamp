@@ -1,7 +1,7 @@
 {
-  "name": "@robomnemo/core",
+  "name": "gridstamp",
   "version": "0.1.0-alpha.1",
-  "description": "Embodied spatial memory + payment verification for autonomous robots. 3DGS-powered spatial proof protocol.",
+  "description": "Spatial proof-of-presence for autonomous robots. Prove location, build trust, get paid. 3DGS + place cells + cryptographic verification.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -46,22 +46,25 @@
     "prepublishOnly": "npm run clean && npm run build && npm run test"
   },
   "keywords": [
+    "gridstamp",
+    "spatial-proof",
+    "proof-of-presence",
     "robotics",
     "spatial-memory",
     "3d-gaussian-splatting",
     "payment-verification",
-    "spatial-proof",
     "autonomous-robots",
     "place-cells",
     "grid-cells",
     "anti-spoofing",
-    "merkle-tree"
+    "trust-tiers",
+    "fleet-management"
   ],
   "author": "Jerry Omiagbo <omiagbogold@icloud.com>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/t49qnsx7qt-kpanks/robomnemo"
+    "url": "https://github.com/t49qnsx7qt-kpanks/gridstamp"
   },
   "engines": {
     "node": ">=20.0.0"

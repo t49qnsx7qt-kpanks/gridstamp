@@ -1,5 +1,5 @@
 /**
- * Math utilities for RoboMnemo
+ * Math utilities for GridStamp
  * Vector ops, quaternion math, coordinate transforms
  */
 import type { Vec3, Quaternion, Mat4, Pose } from '../types/index.js';

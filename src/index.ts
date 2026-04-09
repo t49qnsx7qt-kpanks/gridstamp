@@ -1,5 +1,5 @@
 /**
- * @robomnemo/core — Embodied Spatial Memory + Payment Verification for Robots
+ * GridStamp — Spatial Proof-of-Presence for Autonomous Robots
  *
  * Nobody else unifies spatial memory + payment verification + anti-spoofing.
  * - Niantic has maps but no payments
@@ -7,7 +7,7 @@
  * - OpenMind has robot payments but no spatial proof
  * - FOAM/Auki has proof-of-location but no payments
  *
- * RoboMnemo sits at the intersection.
+ * GridStamp sits at the intersection.
  *
  * API:
  *   agent.see()            — Capture + process current view
@@ -47,8 +47,8 @@ export type {
   SpatialSettlement,
   ThreatDetection,
   FrameIntegrity,
-  RoboMnemoConfig,
-  RoboMnemoAgent,
+  GridStampConfig,
+  GridStampAgent,
 } from './types/index.js';
 
 export {
@@ -101,8 +101,8 @@ export {
 // ============================================================
 
 import type {
-  RoboMnemoConfig,
-  RoboMnemoAgent as IRoboMnemoAgent,
+  GridStampConfig,
+  GridStampAgent as IGridStampAgent,
   CameraFrame,
   EpisodicMemory,
   Path,
@@ -131,15 +131,15 @@ import { FrameIntegrityChecker, CanarySystem } from './antispoofing/index.js';
 import { deriveKey } from './utils/crypto.js';
 
 /**
- * Create a RoboMnemo agent
+ * Create a GridStamp agent
  *
  * This is the main entry point. Pass a config + camera driver,
  * get back an agent with see/remember/navigate/verify/settle methods.
  */
 export function createAgent(
-  config: RoboMnemoConfig,
+  config: GridStampConfig,
   primaryDriver: CameraDriver,
-): IRoboMnemoAgent {
+): IGridStampAgent {
   // Validate config
   if (!config.robotId) throw new Error('robotId is required');
   if (!config.hmacSecret || config.hmacSecret.length < 32) {
@@ -177,7 +177,7 @@ export function createAgent(
   let lastFrame: CameraFrame | undefined;
   let initialized = false;
 
-  const agent: IRoboMnemoAgent = {
+  const agent: IGridStampAgent = {
     async see(): Promise<CameraFrame> {
       if (!initialized) {
         await frameCapture.initialize();
@@ -300,7 +300,7 @@ export function createAgent(
       spatialProof: boolean;
     }): Promise<SpatialSettlement> {
       if (!params.spatialProof) {
-        throw new Error('RoboMnemo requires spatialProof=true. Use MnemoPay directly for non-spatial payments.');
+        throw new Error('GridStamp requires spatialProof=true. Use MnemoPay directly for non-spatial payments.');
       }
 
       const proof = await agent.verifySpatial();

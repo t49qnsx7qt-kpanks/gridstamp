@@ -1,5 +1,5 @@
 /**
- * Cryptographic utilities for RoboMnemo
+ * Cryptographic utilities for GridStamp
  * HMAC-SHA256 frame signing, nonce generation, constant-time comparison
  */
 import { createHmac, createHash, randomBytes, timingSafeEqual } from 'node:crypto';
@@ -89,6 +89,6 @@ export function sha256(data: Buffer | Uint8Array | string): string {
  */
 export function deriveKey(masterSecret: string, context: string): string {
   return createHmac('sha256', masterSecret)
-    .update(`robomnemo:${context}`)
+    .update(`gridstamp:${context}`)
     .digest('hex');
 }

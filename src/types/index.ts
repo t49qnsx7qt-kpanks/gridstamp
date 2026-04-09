@@ -1,5 +1,5 @@
 /**
- * @robomnemo/core — Type definitions
+ * gridstamp — Type definitions
  * Embodied spatial memory + payment verification for autonomous robots
  */
 
@@ -362,7 +362,7 @@ export interface FrameIntegrity {
 // AGENT API (top-level)
 // ============================================================
 
-export interface RoboMnemoConfig {
+export interface GridStampConfig {
   readonly robotId: string;
   readonly cameras: readonly CameraConfig[];
   readonly hmacSecret: string; // MUST be provided, no defaults
@@ -380,7 +380,7 @@ export interface RoboMnemoConfig {
 }
 
 /** Main agent interface */
-export interface RoboMnemoAgent {
+export interface GridStampAgent {
   /** Capture and process current camera view */
   see(): Promise<CameraFrame>;
 

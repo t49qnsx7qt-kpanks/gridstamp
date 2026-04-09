@@ -1,13 +1,13 @@
-# RoboMnemo
+# GridStamp
 
-Bio-inspired spatial memory and payment verification for autonomous robots.
+Spatial proof-of-presence for autonomous robots.
 
 **IMPORTANT:** This is a SEPARATE project from MnemoPay. Do not mix codebases.
 
 ## Quick Commands
 
 ```bash
-npm test              # Run all 87 tests
+npm test              # Run all 221 tests
 npx vitest run        # Same, explicit
 npx tsc --noEmit      # Type check only
 npm run build         # Compile to dist/
@@ -15,7 +15,7 @@ npm run build         # Compile to dist/
 
 ## Architecture
 
-5 layers, each isolated with derived keys:
+6 layers, each isolated with derived keys:
 
 | Layer | Path | Purpose |
 |-------|------|---------|
@@ -40,7 +40,7 @@ npm run build         # Compile to dist/
 - `CameraFrame` — RGB + depth + pose + HMAC + sequence
 - `SpatialProof` — Rendered vs captured comparison with cryptographic signature
 - `SpatialSettlement` — Payment contingent on spatial verification passing
-- `RoboMnemoAgent` — Main API: see/remember/navigate/verifySpatial/settle
+- `GridStampAgent` — Main API: see/remember/navigate/verifySpatial/settle
 
 ## Module Map
 
