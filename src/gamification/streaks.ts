@@ -7,7 +7,7 @@
  *   Break = reset to 0, trust penalty applied
  */
 
-import { hmacSign, hmacVerify } from '../utils/crypto.js';
+import { hmacSign } from '../utils/crypto.js';
 
 export interface StreakRecord {
   readonly robotId: string;

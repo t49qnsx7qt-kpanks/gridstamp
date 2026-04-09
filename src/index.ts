@@ -112,6 +112,7 @@ import type {
   Pose,
   Vec3,
   PathAlgorithm,
+  VerificationThresholds,
 } from './types/index.js';
 import type { CameraDriver } from './perception/index.js';
 import { FrameCapture } from './perception/index.js';
@@ -289,7 +290,7 @@ export function createAgent(
         'pending-merkle-root', // would come from long-term memory
         [],
         proofKey,
-        config.verificationThresholds,
+        config.verificationThresholds as VerificationThresholds | undefined,
       );
     },
 

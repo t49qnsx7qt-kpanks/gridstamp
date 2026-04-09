@@ -6,7 +6,7 @@
  * Categories: operational, safety, navigation, endurance, special
  */
 
-import { hmacSign, hmacVerify, generateNonce } from '../utils/crypto.js';
+import { hmacSign, hmacVerify } from '../utils/crypto.js';
 
 export enum BadgeCategory {
   OPERATIONAL = 'operational',

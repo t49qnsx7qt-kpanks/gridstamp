@@ -12,7 +12,7 @@ import { MerkleTree } from 'merkletreejs';
 import type {
   ShortTermEntry,
   EpisodicMemory,
-  LongTermMemory,
+  LongTermMemory as LTMEntry,
   ConsolidationEvent,
   MemoryTier,
   GaussianSplat,
@@ -180,7 +180,7 @@ export class LongTermMemory {
   }
 
   /** Persist an episodic memory as a Merkle-signed long-term entry */
-  persist(roomId: string, scene: SplatScene): LongTermMemory {
+  persist(roomId: string, scene: SplatScene): LTMEntry {
     // Build Merkle tree from splat data
     const leaves = scene.splats.map(splat => {
       const data = this.serializeSplat(splat);
@@ -202,7 +202,7 @@ export class LongTermMemory {
     );
     const signature = hmacSign(signaturePayload, this.hmacSecret);
 
-    const entry: LongTermMemory = {
+    const entry: LTMEntry = {
       id: generateNonce(16),
       roomId,
       scene,
@@ -214,12 +214,12 @@ export class LongTermMemory {
       splatCount: scene.count,
     };
 
-    this.rooms.set(`${roomId}:${entry.id}`, entry as unknown as LongTermMemory_Entry);
+    this.rooms.set(`${roomId}:${entry.id}`, entry);
     return entry;
   }
 
   /** Verify integrity of a long-term memory entry */
-  verify(entry: LongTermMemory): boolean {
+  verify(entry: LTMEntry): boolean {
     // Rebuild Merkle tree and check root
     const leaves = entry.scene.splats.map(splat => {
       const data = this.serializeSplat(splat);
@@ -234,11 +234,11 @@ export class LongTermMemory {
   }
 
   /** Get all memories for a room */
-  getRoom(roomId: string): readonly LongTermMemory[] {
-    const results: LongTermMemory[] = [];
+  getRoom(roomId: string): readonly LTMEntry[] {
+    const results: LTMEntry[] = [];
     for (const [key, value] of this.rooms.entries()) {
       if (key.startsWith(`${roomId}:`)) {
-        results.push(value as unknown as LongTermMemory);
+        results.push(value as unknown as LTMEntry);
       }
     }
     return results;
@@ -269,7 +269,7 @@ export class LongTermMemory {
 }
 
 // Internal type alias to avoid name collision
-type LongTermMemory_Entry = LongTermMemory;
+type LongTermMemory_Entry = LTMEntry;
 
 // ============================================================
 // MEMORY CONSOLIDATION ENGINE

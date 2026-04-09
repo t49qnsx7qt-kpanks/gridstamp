@@ -22,7 +22,7 @@ import type {
   ThreatSeverity,
   FrameIntegrity,
 } from '../types/index.js';
-import { verifyFrame, hmacVerify, sha256 } from '../utils/crypto.js';
+import { verifyFrame, sha256 } from '../utils/crypto.js';
 
 // ============================================================
 // REPLAY ATTACK DETECTION

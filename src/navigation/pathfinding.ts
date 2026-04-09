@@ -8,15 +8,12 @@
  */
 import type {
   Vec3,
-  Quaternion,
-  Pose,
   Path,
   Waypoint,
   PathAlgorithm,
   AABB,
-  ReferenceFrame,
 } from '../types/index.js';
-import { vec3Distance, vec3Sub, vec3Add, vec3Scale, vec3Normalize, egoToAllo, alloToEgo } from '../utils/math.js';
+import { vec3Distance, vec3Sub, vec3Add, vec3Scale, vec3Normalize } from '../utils/math.js';
 import { generateNonce } from '../utils/crypto.js';
 
 // ============================================================
@@ -117,7 +114,6 @@ export function aStarPath(
 ): Vec3[] | null {
   const resolution = grid.resolution;
   const startKey = positionKey(start, resolution);
-  const goalKey = positionKey(goal, resolution);
 
   const startNode: AStarNode = {
     position: start,
@@ -372,8 +368,6 @@ export function planPath(
   bounds: AABB,
   algorithm: PathAlgorithm = 'a-star' as PathAlgorithm,
 ): Path | null {
-  const startTime = Date.now();
-
   let points: Vec3[] | null;
 
   if (algorithm === 'rrt-star') {

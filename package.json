@@ -1,6 +1,6 @@
 {
   "name": "gridstamp",
-  "version": "0.1.0-alpha.1",
+  "version": "1.0.0",
   "description": "Spatial proof-of-presence for autonomous robots. Prove location, build trust, get paid. 3DGS + place cells + cryptographic verification.",
   "type": "module",
   "main": "dist/index.js",

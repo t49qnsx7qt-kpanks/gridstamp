@@ -8,7 +8,6 @@
  */
 
 import type { Vec3, AABB } from '../types/index.js';
-import { vec3Distance } from '../utils/math.js';
 import { hmacSign, generateNonce } from '../utils/crypto.js';
 
 export interface Zone {

@@ -24,7 +24,7 @@ import type {
   Pose,
   VerificationThresholds,
 } from '../types/index.js';
-import { hmacSign, generateNonce, sha256, deriveKey } from '../utils/crypto.js';
+import { hmacSign, generateNonce, deriveKey } from '../utils/crypto.js';
 import { meanAbsoluteError } from '../utils/math.js';
 
 // ============================================================
@@ -218,7 +218,8 @@ function localVariance(img: Uint8Array, width: number, height: number, blockSize
 function histogram(img: Uint8Array): Float32Array {
   const hist = new Float32Array(256);
   for (let i = 0; i < img.length; i++) {
-    hist[img[i]!]++;
+    const val = img[i]!;
+    hist[val] = (hist[val] ?? 0) + 1;
   }
   return hist;
 }

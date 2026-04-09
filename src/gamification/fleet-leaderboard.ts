@@ -7,7 +7,7 @@
  * Entries are HMAC-signed to prevent tampering.
  */
 
-import { hmacSign, hmacVerify, generateNonce } from '../utils/crypto.js';
+import { hmacSign, hmacVerify } from '../utils/crypto.js';
 import { TrustTier } from './trust-tiers.js';
 
 export enum LeaderboardPeriod {

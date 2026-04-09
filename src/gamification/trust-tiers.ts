@@ -8,7 +8,7 @@
  * Tier changes are HMAC-signed to prevent forgery.
  */
 
-import { hmacSign, hmacVerify, generateNonce, sha256 } from '../utils/crypto.js';
+import { hmacSign, hmacVerify, generateNonce } from '../utils/crypto.js';
 
 export enum TrustTier {
   UNTRUSTED = 0,
