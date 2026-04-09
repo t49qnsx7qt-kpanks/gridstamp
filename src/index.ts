@@ -67,6 +67,7 @@ export * from './memory/index.js';
 export * from './navigation/index.js';
 export * from './verification/index.js';
 export * from './antispoofing/index.js';
+export * from './gamification/index.js';
 
 // Re-export key utilities
 export {

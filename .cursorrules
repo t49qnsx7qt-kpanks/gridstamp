@@ -30,7 +30,7 @@ Testing:
 - Framework: vitest
 - Run all: npx vitest run
 - Run specific: npx vitest run tests/memory/place-cells.test.ts
-- 87 tests across 5 test files
+- 169 tests across 10 test files
 - Test images use deterministic pseudo-random data (seed-based)
 
 Key Patterns:
@@ -39,6 +39,14 @@ Key Patterns:
 - SSIM: 8x8 sliding window, constants C1=6.5025 C2=58.5225
 - Spatial proof composite: SSIM * 0.4 + (1-LPIPS) * 0.3 + depthScore * 0.3
 - Settlement: atomic verify-then-pay, proof must pass integrity check first
+
+Gamification Layer (maps WeMeetWeMet's activity-based system to robot fleet management):
+- Trust Tiers: 6 levels (Untrusted→Autonomous), fee multipliers, tx limits, HMAC-signed tier changes
+- Badges: 20+ capability badges across 5 categories, HMAC-signed awards
+- Streaks: Daily consecutive operation streaks, multiplier curve (1.0x→2.0x), freeze system
+- Zone Mastery: Geographic expertise = coverage × success_rate × time_factor
+- Fleet Leaderboard: Multi-fleet rankings by trust/deliveries/zones/safety, HMAC-signed entries
+- All tier changes, badges, and leaderboard entries are HMAC-signed to prevent forgery
 
 File Layout:
 src/
@@ -51,6 +59,11 @@ src/
   navigation/pathfinding.ts — A*, RRT*, occupancy grid
   verification/spatial-proof.ts — SSIM, LPIPS, spatial proofs, settlements
   antispoofing/detector.ts — Replay, patches, depth, canaries
+  gamification/trust-tiers.ts — 6-tier trust system with promotion/demotion
+  gamification/badges.ts — 20+ capability badges, criteria engine
+  gamification/streaks.ts — Daily streak multipliers, freeze system
+  gamification/zone-mastery.ts — Geographic zone expertise scoring
+  gamification/fleet-leaderboard.ts — Fleet-wide robot rankings
   index.ts              — createAgent() factory, public API
 
 Dependencies:

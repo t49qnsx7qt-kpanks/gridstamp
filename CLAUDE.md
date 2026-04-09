@@ -24,6 +24,7 @@ npm run build         # Compile to dist/
 | Navigation | src/navigation/ | A* + RRT* on 3D voxel grids |
 | Verification | src/verification/ | SSIM/LPIPS spatial proofs → payments |
 | Anti-spoofing | src/antispoofing/ | Replay, patches, depth injection, canaries |
+| Gamification | src/gamification/ | Trust tiers, badges, streaks, zone mastery, fleet leaderboard |
 
 ## Security Model
 
@@ -52,4 +53,9 @@ npm run build         # Compile to dist/
 - `src/navigation/pathfinding.ts` — OccupancyGrid, aStarPath, rrtStarPath
 - `src/verification/spatial-proof.ts` — computeSSIM, approximateLPIPS, generateSpatialProof, createSettlement
 - `src/antispoofing/detector.ts` — ReplayDetector, AdversarialPatchDetector, CanarySystem, FrameIntegrityChecker
+- `src/gamification/trust-tiers.ts` — TrustTierSystem (6 tiers, HMAC-signed promotion/demotion)
+- `src/gamification/badges.ts` — BadgeSystem (20+ badges, 5 categories, HMAC-signed awards)
+- `src/gamification/streaks.ts` — StreakSystem (daily streaks, multiplier curve, freeze system)
+- `src/gamification/zone-mastery.ts` — ZoneMasterySystem (coverage × success × time scoring)
+- `src/gamification/fleet-leaderboard.ts` — FleetLeaderboard (multi-fleet rankings, HMAC-signed entries)
 - `src/index.ts` — createAgent() factory, re-exports everything

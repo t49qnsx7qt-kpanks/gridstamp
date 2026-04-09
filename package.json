@@ -29,6 +29,10 @@
     "./antispoofing": {
       "import": "./dist/antispoofing/index.js",
       "types": "./dist/antispoofing/index.d.ts"
+    },
+    "./gamification": {
+      "import": "./dist/gamification/index.js",
+      "types": "./dist/gamification/index.d.ts"
     }
   },
   "scripts": {
